@@ -7,11 +7,14 @@ pdfWriter = PyPDF2.PdfWriter()
 def automaticOption():
     init_dir = r'Documents'
     for pdfs in os.listdir(init_dir):
-        final_dir = f'{init_dir}\{pdfs}'
-        pdf = PyPDF2.PdfReader(final_dir)
-        for pageNum in range(len(pdf.pages)):
-            pageObj = pdf.pages[pageNum]
-            pdfWriter.add_page(pageObj)
+        if '.txt' in pdfs:
+            continue
+        else:
+            final_dir = f'{init_dir}\{pdfs}'
+            pdf = PyPDF2.PdfReader(final_dir)
+            for pageNum in range(len(pdf.pages)):
+                pageObj = pdf.pages[pageNum]
+                pdfWriter.add_page(pageObj)
             
     fileName = input('Ingrese el nombre con el qeu se guardará el PDF (sin extensión .pdf): ')
     fileName = f'Results\{fileName}.pdf'
